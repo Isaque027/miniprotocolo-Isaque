@@ -1,32 +1,20 @@
 """
-DEMONSTRAÇÃO: TCP E UDP COM UM MINIPROTOCOLO
+ALUNO: Isaque Samuel Miranda dos Reis
+TURMA: Sistemas para Internet 4° Módulo
+DATA: 
+PROTOCOLO ESCOLHIDO: TCP
+REGISTRO DAS ALTERAÇÕES
+ALTERAÇÃO 01
+O que foi implementado: Novo comando no processamento de mensagens MINUSCULA|
+Entrada testada: AAAAAAAAAA
+Saída obtida: aaaaaaaaaa
 
-Este único arquivo pode funcionar como:
-1. Servidor TCP
-2. Cliente TCP
-3. Servidor UDP
-4. Cliente UDP
-
-Para testar entre dois computadores:
-- os dois computadores devem estar na mesma rede;
-- execute o servidor em um computador;
-- execute o cliente no outro computador;
-- no cliente, informe o endereço IP do servidor.
-
-Formato das mensagens do nosso miniprotocolo:
-
-    COMANDO|CONTEÚDO
-
-Exemplos:
-
-    ECO|Olá
-    MAIUSCULA|redes de computadores
-    TAMANHO|quantos caracteres existem aqui?
-    HORA|
-    SAIR|
-
-O objetivo não é criar um sistema profissional. O objetivo é observar, com
-um código pequeno, as diferenças entre TCP e UDP.
+ALTERAÇÃO 02
+O que foi implementado: Novo comando no processamento de mensagens INVERTER|
+Entrada testada: socket
+Saída obtida: tekcos
+...
+Continue até a ALTERAÇÃO 10.
 """
 
 import socket
@@ -66,6 +54,9 @@ def processar_mensagem(mensagem):
 
     if comando == "MAIUSCULA":
         return "RESPOSTA|" + conteudo.upper()
+    # Alteração 01: Comando MINUSCULA
+    if comando == "MINUSCULA":
+        return "RESPOSTA|" + conteudo.lower()
 
     if comando == "TAMANHO":
         quantidade = len(conteudo)
@@ -74,6 +65,9 @@ def processar_mensagem(mensagem):
     if comando == "HORA":
         horario = datetime.now().strftime("%H:%M:%S")
         return "RESPOSTA|Agora são " + horario
+    #Alteração 02| Comando INVERTER
+    if comando == "INVERTER":
+        return f"RESPOSTA|{conteudo[::-1]}"
 
     if comando == "SAIR":
         return "FIM|Conversa encerrada"
@@ -268,9 +262,12 @@ def mostrar_comandos():
     print("Comandos disponíveis:")
     print("ECO|Olá")
     print("MAIUSCULA|redes de computadores")
+    print("MINUSCULA|REDES DE COMPUTADORES")
     print("TAMANHO|quantos caracteres existem aqui?")
     print("HORA|")
+    print("INVERTER|")
     print("SAIR|")
+    
     print()
 
 
