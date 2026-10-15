@@ -104,6 +104,14 @@ def processar_mensagem(mensagem):
                 return "ERRO|Informe dois números separados por vírgula"
         return "ERRO|Informe dois números separados por vírgula"
 
+    #Alteração 05 Comando PING
+    if (comando == "PING"):
+        return "PONG|Servidor ativo"
+
+    #Alteração 06 Comando AJUDA
+    if (comando == "AJUDA"):
+        return "RESPOSTA|ECO, MAIUSCULA, MINUSCULA, INVERTER, TAMANHO, PALAVRAS, SOMA, HORA, PING, AJUDA, SAIR"
+
     if comando == "SAIR":
         return "FIM|Conversa encerrada"
 
@@ -303,8 +311,10 @@ def mostrar_comandos():
     print("INVERTER|")
     print("PALAVRAS|")
     print("SOMA|x,y")
+    print("PING|")
+    print("AJUDA|")
     print("SAIR|")
-    
+
     print()
 
 
