@@ -13,6 +13,17 @@ ALTERAÇÃO 02
 O que foi implementado: Novo comando no processamento de mensagens INVERTER|
 Entrada testada: socket
 Saída obtida: tekcos
+
+ALTERAÇÃO 03
+O que foi implementado: Novo comando no processamento de mensagens PALAVRAS|
+Entrada testada: redes de computadores
+Saída obtida: O texto possui 3 palavras
+
+ALTERAÇÃO 04
+O que foi implementado: Novo comando no processamento de SOMA|
+Entrada testada: 1.5,1.4
+Saída obtida: 2.9
+
 ...
 Continue até a ALTERAÇÃO 10.
 """
@@ -54,6 +65,7 @@ def processar_mensagem(mensagem):
 
     if comando == "MAIUSCULA":
         return "RESPOSTA|" + conteudo.upper()
+
     # Alteração 01: Comando MINUSCULA
     if comando == "MINUSCULA":
         return "RESPOSTA|" + conteudo.lower()
@@ -65,9 +77,32 @@ def processar_mensagem(mensagem):
     if comando == "HORA":
         horario = datetime.now().strftime("%H:%M:%S")
         return "RESPOSTA|Agora são " + horario
+
     #Alteração 02| Comando INVERTER
     if comando == "INVERTER":
         return f"RESPOSTA|{conteudo[::-1]}"
+
+    #Alteração 03 Comando PALAVRAS
+    if comando == "PALAVRAS":
+        palavras = conteudo.split()
+        return f"RESPOSTA|O texto possui {len(palavras)} palavras"
+
+    #Alteração 04 Comando SOMA
+    if comando == "SOMA":
+        numeros = conteudo.split(",")
+        if (len(numeros) == 2):
+            try:
+                numero1 = float(numeros[0])
+                numero2 = float(numeros[1])
+                soma = numero1 + numero2
+
+                if (soma.is_integer()):
+                    soma = int(soma)
+
+                return f"RESPOSTA|{soma}"
+            except ValueError:
+                return "ERRO|Informe dois números separados por vírgula"
+        return "ERRO|Informe dois números separados por vírgula"
 
     if comando == "SAIR":
         return "FIM|Conversa encerrada"
@@ -266,6 +301,8 @@ def mostrar_comandos():
     print("TAMANHO|quantos caracteres existem aqui?")
     print("HORA|")
     print("INVERTER|")
+    print("PALAVRAS|")
+    print("SOMA|x,y")
     print("SAIR|")
     
     print()
